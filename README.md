@@ -122,7 +122,6 @@ df.iloc[[0,-1],:]
 
 ```python
 def predictor(method, target, t):
-
     data = df.copy()
     target = codes[target]
     target_t = f'{target}_{t}'
@@ -178,7 +177,7 @@ def predictor(method, target, t):
         ])
         model.compile(optimizer='adam', loss='mean_squared_error')
         early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=20)
-        model.fit(training_X, training_y, epochs=200, validation_split=0.2, callbacks=[early_stopping])
+        model.fit(training_X, training_y, epochs=200, validation_split=0.2, callbacks=[early_stopping], verbose=0)
         training_prediction = model.predict(training_X)
         testing_prediction = model.predict(testing_X)
         training_accuracy = round(r2_score(training_y, training_prediction), 2)
@@ -194,16 +193,104 @@ def performance(t):
     performances['Country'] = codes.keys()
     performances['r2: Simple'] = performances['Country'].apply(lambda x: predictor('simple', x, t)[2])
     performances['r2: Multi'] = performances['Country'].apply(lambda x: predictor('multi', x, t)[2])
-    # performances['r2: Neural'] = performances['Country'].apply(lambda x: predictor('neural', x, t)[2])
+    performances['r2: Neural'] = performances['Country'].apply(lambda x: predictor('neural', x, t)[2])
     performances = performances.set_index('Country')
     simple_mean = round(performances['r2: Simple'].mean(), 2)
     multi_mean = round(performances['r2: Multi'].mean(), 2)
-    # nn_mean = round(performances['r2: Neural'].mean(), 2)
-    performances.loc['Mean'] = {'r2: Simple': simple_mean, 'r2: Multi': multi_mean}
+    nn_mean = round(performances['r2: Neural'].mean(), 2)
+    performances.loc['Mean'] = {'r2: Simple': simple_mean, 'r2: Multi': multi_mean, 'r2: Neural': nn_mean}
     return performances
 
 performance(10)
 ```
+
+    /Users/jv/anaconda3/envs/neural_network/lib/python3.11/site-packages/keras/src/layers/core/dense.py:86: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+      super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+
+
+    [1m111/111[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 341us/step
+    [1m49/49[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 236us/step
+
+
+    /Users/jv/anaconda3/envs/neural_network/lib/python3.11/site-packages/keras/src/layers/core/dense.py:86: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+      super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+
+
+    [1m111/111[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 354us/step
+    [1m49/49[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 229us/step
+
+
+    /Users/jv/anaconda3/envs/neural_network/lib/python3.11/site-packages/keras/src/layers/core/dense.py:86: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+      super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+
+
+    [1m111/111[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 417us/step
+    [1m49/49[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 247us/step
+
+
+    /Users/jv/anaconda3/envs/neural_network/lib/python3.11/site-packages/keras/src/layers/core/dense.py:86: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+      super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+
+
+    [1m111/111[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 366us/step
+    [1m49/49[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 231us/step
+
+
+    /Users/jv/anaconda3/envs/neural_network/lib/python3.11/site-packages/keras/src/layers/core/dense.py:86: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+      super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+
+
+    [1m111/111[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 341us/step
+    [1m49/49[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 226us/step
+
+
+    /Users/jv/anaconda3/envs/neural_network/lib/python3.11/site-packages/keras/src/layers/core/dense.py:86: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+      super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+
+
+    [1m111/111[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 444us/step
+    [1m49/49[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 365us/step
+
+
+    /Users/jv/anaconda3/envs/neural_network/lib/python3.11/site-packages/keras/src/layers/core/dense.py:86: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+      super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+
+
+    [1m111/111[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 412us/step
+    [1m49/49[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 248us/step
+
+
+    /Users/jv/anaconda3/envs/neural_network/lib/python3.11/site-packages/keras/src/layers/core/dense.py:86: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+      super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+
+
+    [1m111/111[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 418us/step
+    [1m49/49[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 236us/step
+
+
+    /Users/jv/anaconda3/envs/neural_network/lib/python3.11/site-packages/keras/src/layers/core/dense.py:86: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+      super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+
+
+    [1m111/111[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 364us/step
+    [1m49/49[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 238us/step
+
+
+    /Users/jv/anaconda3/envs/neural_network/lib/python3.11/site-packages/keras/src/layers/core/dense.py:86: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+      super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+
+
+    [1m111/111[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 344us/step
+    [1m49/49[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 235us/step
+
+
+    /Users/jv/anaconda3/envs/neural_network/lib/python3.11/site-packages/keras/src/layers/core/dense.py:86: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+      super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+
+
+    [1m111/111[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 355us/step
+    [1m49/49[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 234us/step
+
 
 
 
@@ -228,9 +315,11 @@ performance(10)
       <th></th>
       <th>r2: Simple</th>
       <th>r2: Multi</th>
+      <th>r2: Neural</th>
     </tr>
     <tr>
       <th>Country</th>
+      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -240,61 +329,73 @@ performance(10)
       <th>US</th>
       <td>0.80</td>
       <td>0.93</td>
+      <td>0.90</td>
     </tr>
     <tr>
       <th>Germany</th>
       <td>0.92</td>
       <td>0.96</td>
+      <td>0.93</td>
     </tr>
     <tr>
       <th>UK</th>
       <td>0.64</td>
       <td>0.88</td>
+      <td>0.80</td>
     </tr>
     <tr>
       <th>France</th>
       <td>0.97</td>
       <td>0.98</td>
+      <td>0.96</td>
     </tr>
     <tr>
       <th>Australia</th>
       <td>0.74</td>
       <td>0.88</td>
+      <td>0.84</td>
     </tr>
     <tr>
       <th>Canada</th>
       <td>0.77</td>
       <td>0.91</td>
+      <td>0.88</td>
     </tr>
     <tr>
       <th>New Zealand</th>
       <td>0.66</td>
       <td>0.85</td>
+      <td>0.81</td>
     </tr>
     <tr>
       <th>Japan</th>
       <td>0.17</td>
       <td>0.67</td>
+      <td>0.61</td>
     </tr>
     <tr>
       <th>Switzerland</th>
       <td>0.70</td>
       <td>0.87</td>
+      <td>0.82</td>
     </tr>
     <tr>
       <th>Norway</th>
       <td>0.58</td>
       <td>0.81</td>
+      <td>0.74</td>
     </tr>
     <tr>
       <th>Italy</th>
       <td>0.52</td>
       <td>0.80</td>
+      <td>0.72</td>
     </tr>
     <tr>
       <th>Mean</th>
       <td>0.68</td>
       <td>0.87</td>
+      <td>0.82</td>
     </tr>
   </tbody>
 </table>
