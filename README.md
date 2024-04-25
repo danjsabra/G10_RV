@@ -194,18 +194,19 @@ def performance(t):
     performances['Country'] = codes.keys()
     performances['r2: Simple'] = performances['Country'].apply(lambda x: predictor('simple', x, t)[2])
     performances['r2: Multi'] = performances['Country'].apply(lambda x: predictor('multi', x, t)[2])
-    performances['r2: Neural'] = performances['Country'].apply(lambda x: predictor('neural', x, t)[2])
+    # performances['r2: Neural'] = performances['Country'].apply(lambda x: predictor('neural', x, t)[2])
     performances = performances.set_index('Country')
     simple_mean = round(performances['r2: Simple'].mean(), 2)
     multi_mean = round(performances['r2: Multi'].mean(), 2)
-    nn_mean = round(performances['r2: Neural'].mean(), 2)
-    performances.loc['Mean'] = {'r2: Simple': simple_mean, 'r2: Multi': multi_mean, 'r2: Neural': nn_mean}
+    # nn_mean = round(performances['r2: Neural'].mean(), 2)
+    performances.loc['Mean'] = {'r2: Simple': simple_mean, 'r2: Multi': multi_mean}
     return performances
 
 performance(10)
 ```
-    Epoch 1/200
-```
+
+
+
 
 <div>
 <style scoped>
@@ -227,11 +228,9 @@ performance(10)
       <th></th>
       <th>r2: Simple</th>
       <th>r2: Multi</th>
-      <th>r2: Neural</th>
     </tr>
     <tr>
       <th>Country</th>
-      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -241,73 +240,61 @@ performance(10)
       <th>US</th>
       <td>0.80</td>
       <td>0.93</td>
-      <td>0.91</td>
     </tr>
     <tr>
       <th>Germany</th>
       <td>0.92</td>
       <td>0.96</td>
-      <td>0.93</td>
     </tr>
     <tr>
       <th>UK</th>
       <td>0.64</td>
       <td>0.88</td>
-      <td>0.84</td>
     </tr>
     <tr>
       <th>France</th>
       <td>0.97</td>
       <td>0.98</td>
-      <td>0.94</td>
     </tr>
     <tr>
       <th>Australia</th>
       <td>0.74</td>
       <td>0.88</td>
-      <td>0.86</td>
     </tr>
     <tr>
       <th>Canada</th>
       <td>0.77</td>
       <td>0.91</td>
-      <td>0.87</td>
     </tr>
     <tr>
       <th>New Zealand</th>
       <td>0.66</td>
       <td>0.85</td>
-      <td>0.80</td>
     </tr>
     <tr>
       <th>Japan</th>
       <td>0.17</td>
       <td>0.67</td>
-      <td>0.63</td>
     </tr>
     <tr>
       <th>Switzerland</th>
       <td>0.70</td>
       <td>0.87</td>
-      <td>0.83</td>
     </tr>
     <tr>
       <th>Norway</th>
       <td>0.58</td>
       <td>0.81</td>
-      <td>0.75</td>
     </tr>
     <tr>
       <th>Italy</th>
       <td>0.52</td>
       <td>0.80</td>
-      <td>0.66</td>
     </tr>
     <tr>
       <th>Mean</th>
       <td>0.68</td>
       <td>0.87</td>
-      <td>0.82</td>
     </tr>
   </tbody>
 </table>
